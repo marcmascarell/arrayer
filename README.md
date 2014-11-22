@@ -18,7 +18,7 @@ Laravel
 Add the Service Provider to `app/config` at the bottom of Providers:
 
 ```php
-Mascame\Arrayer\ArrayerServiceProvider.php
+Mascame\Arrayer\ArrayerServiceProvider
 ```
 
 Usage
