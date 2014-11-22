@@ -1,6 +1,15 @@
 {
     "name": "mascame/arrayer",
-    "description": "",
+    "description": "Prepares an array to be put in a file. Very useful for configuration files.",
+    "homepage": "https://github.com/marcmascarell/arrayer",
+    "keywords": [
+        "laravel",
+        "arrayer",
+        "array",
+        "array manipulation",
+        "configuration"
+    ],
+    "license": "MIT",
     "authors": [
         {
             "name": "Marc Mascarell",
