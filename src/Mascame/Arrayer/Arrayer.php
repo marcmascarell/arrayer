@@ -78,7 +78,7 @@ class Arrayer {
      */
     protected function keyStart($key)
     {
-        return $this->getIndentationTabs() . '"' . $key . '" => array(' . PHP_EOL;
+        return $this->getIndentationTabs() . $this->wrapElement($key) . ' => array(' . PHP_EOL;
     }
 
     /**
@@ -122,7 +122,7 @@ class Arrayer {
      * @return string
      */
     private function wrapElement($string) {
-        return '"' . $string . '"';
+        return '"' . addslashes($string) . '"';
     }
 
     /**
