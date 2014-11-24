@@ -8,9 +8,8 @@ Installation
 
 Require this package in your composer.json and run composer update:
 
-    "mascame/arrayer": "dev-master"
+    "mascame/arrayer": "1.*"
 
-Or use latest stable (recommended)
 
 Laravel
 --------------
@@ -94,6 +93,12 @@ $arrayer->append(array("Hello" => "World!"));
 
 File::put('test.php', $arrayer->getContent());
 ```
+
+Changelog
+----
+
+### 1.1
+- Added escaping for keys and values
 
 License
 ----
