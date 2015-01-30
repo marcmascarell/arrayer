@@ -11,7 +11,7 @@ Installation
 
 Require this package in your composer.json and run composer update:
 
-    "mascame/arrayer": "1.*"
+    "mascame/arrayer": "2.*"
 
 
 Laravel
