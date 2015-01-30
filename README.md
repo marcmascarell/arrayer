@@ -29,76 +29,107 @@ Usage
 This example uses laravel's "File" class to put file contents. 
 
 ```php
+
+use \Mascame\Arrayer\Arrayer;
+use \Mascame\Arrayer\Builder;
+
 $array = array(
 
-    'this' => array(
-        'is' => 'an',
-        'example'
-    ),
+	'this' => array(
+		'is' => 'an',
+		'example'
+	),
 
-    'we use a' => 'normal array',
+	'we use a' => 'normal array',
 
-    'and transform it' => array(
-        'to be' => array(
-            'able' => array(
-                'to put it' => 'in a file'
-            )
+	'and manipulate it' => array(
+		'as' => array(
+			'we' => array(
+				'want' => ':D'
+			)
+		)
+	),
+
+	'thats it',
+	'cool? :)'
+
+);
+
+$arrayer = new \Mascame\Arrayer\Arrayer($array);
+
+$arrayer->append("I am an appended!");
+
+$arrayer->set('we.use.dot.notation', array('so', 'cool.'));
+$arrayer->set('more.examples', 'test');
+
+$arrayer->set('this.is', 'this is gonna be deleted soon...');
+$arrayer->delete('this.is');
+
+$arrayer->get('more.examples'); // returns 'test'
+
+$arrayer->getArray();
+/** equals to
+
+(
+    [this] => Array
+        (
+            [0] => example
         )
-    ),
 
-    'thats it',
-    'cool? :)'
+    [we use a] => normal array
+    [and transform it] => Array
+        (
+            [to be] => Array
+                (
+                    [able] => Array
+                        (
+                            [to put it] => in a file
+                        )
+                )
+        )
 
-);
+    [0] => thats it
+    [1] => cool? :)
+    [2] => I am an appended!
+    [we] => Array
+        (
+            [use] => Array
+                (
+                    [dot] => Array
+                        (
+                            [notation] => Array
+                                (
+                                    [0] => so
+                                    [1] => cool.
+                                )
+                        )
+                )
+        )
 
-$arrayer = new Arrayer($array);
+    [more] => Array
+        (
+            [examples] => test
+        )
 
-File::put('test.php', $arrayer->getContent());
-
-/** Results in 'test.php':
-<?php
-
-return array(
-
-	"this" => array(
-		"is" => "an",
-		"0" => "example",
-	),
-
-	"and transform it" => array(
-		"to be" => array(
-			"able" => array(
-				"to put it" => "in a file",
-			),
-
-		),
-
-	),
-
-	"we use a" => "normal array",
-	"0" => "thats it",
-	"1" => "cool? :)",
-);
+)
 */
 ```
 
-Now you can easily use that file:
+Build a prepared output for file:
 
 ```php
-$myArray = include_once('test.php');
 
-// You can manipulate as you like and put it again or append something to the end
-unset($myArray[0]);
-$myArray[] = "new value!";
+$builder = new \Mascame\Arrayer\Builder($arrayer->getArray(), true)); // (any array, (bool)minified)
 
-$arrayer = new Arrayer($myArray);
-$arrayer->append(array("Hello" => "World!"));
-
-File::put('test.php', $arrayer->getContent());
+File::put('test.php', $builder->getContent()); // getContent returns a prepared output to put in a file
 ```
 
 Changelog
 ----
+### 2.0
+- Added manipulation methods (get, set, delete)
+- Dot notation
+- Extracted builder
 
 ### 1.1
 - Added escaping for keys and values

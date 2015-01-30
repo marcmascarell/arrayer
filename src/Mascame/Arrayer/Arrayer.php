@@ -47,11 +47,11 @@ class Arrayer {
      * @param $key
      */
     public function delete($key) {
-        $arrayDot = $this->getArrayDot();
+        $this->getArrayDot();
 
-        unset($arrayDot[$key]);
+        unset($this->arrayDot[$key]);
 
-        $this->revertArrayDot($arrayDot);
+        $this->revertArrayDot();
 
         return $this;
     }
@@ -185,6 +185,7 @@ class Arrayer {
      */
     protected function revertArrayDot($arrayDot = array()) {
         $array = (!empty($arrayDot)) ? $arrayDot : $this->arrayDot;
+
         $this->array = array();
 
         foreach ($array as $key => $value) {
