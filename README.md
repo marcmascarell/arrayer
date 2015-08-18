@@ -4,7 +4,7 @@ Arrayer
 [![Latest Stable Version](https://poser.pugx.org/mascame/arrayer/v/stable.svg)](https://packagist.org/packages/mascame/arrayer)
 [![License](https://poser.pugx.org/mascame/arrayer/license.svg)](https://packagist.org/packages/mascame/arrayer)
 
-Prepares an array to be put in a file. Very useful for configuration files.
+Array manipulation. Get, set, delete keys with dot notation, prepares an array to be put in a file (Very useful for configuration files).
 
 Installation
 --------------
