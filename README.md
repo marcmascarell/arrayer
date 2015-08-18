@@ -119,7 +119,7 @@ Build a prepared output for file:
 
 ```php
 
-$builder = new \Mascame\Arrayer\Builder($arrayer->getArray(), true)); // (any array, (bool)minified)
+$builder = new \Mascame\Arrayer\Builder($arrayer->getArray(), true); // (any array, (bool)minified)
 
 File::put('test.php', $builder->getContent()); // getContent returns a prepared output to put in a file
 ```
