@@ -3,11 +3,11 @@
     "description": "Prepares an array to be put in a file. Very useful for configuration files.",
     "homepage": "https://github.com/marcmascarell/arrayer",
     "keywords": [
-        "laravel",
-        "arrayer",
-        "array",
         "array manipulation",
-        "configuration"
+        "array",
+        "arrayer",
+        "configuration",
+        "laravel"
     ],
     "license": "MIT",
     "authors": [
@@ -17,8 +17,10 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "illuminate/support": "4.2.*"
+        "php": ">=5.4.0"
+    },
+    "require-dev": {
+        "codeception/codeception": "2.*"
     },
     "autoload": {
         "classmap": [

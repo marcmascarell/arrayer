@@ -3,7 +3,7 @@
 namespace Mascame\Arrayer;
 
 
-class Builder extends Arrayer {
+class Builder {
 
     /**
      * @var
@@ -30,7 +30,7 @@ class Builder extends Arrayer {
     /**
      * @param array $array
      */
-    public function __construct(array $array, $minified = false) {
+    public function __construct(\Mascame\Arrayer\Arrayer $array, $minified = false) {
         $this->array = $array;
         $this->minified = $minified;
 
@@ -41,7 +41,7 @@ class Builder extends Arrayer {
      * @return string
      */
     public function getContent() {
-        $this->make($this->getArray());
+        $this->make($this->array->getArray());
 
         return $this->start() . $this->content . $this->end();
     }

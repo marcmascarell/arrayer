@@ -20,6 +20,8 @@ class Arrayer {
      */
     public function __construct(array $array) {
         $this->array = $array;
+
+        $this->convertToArrayDot();
     }
 
     /**
@@ -28,7 +30,11 @@ class Arrayer {
      * @return mixed
      */
     public function get($key, $default = null) {
-        return $this->arrayGet($this->arrayDot, $key, $default);
+        $result = $this->arrayGet($this->arrayDot, $key, $default);
+
+        if (! $result) return $default;
+
+        return $result;
     }
 
     /**
@@ -198,7 +204,7 @@ class Arrayer {
      * @return array
      */
     protected function convertToArrayDot($array = array()) {
-        if (!empty($array)) {
+        if (! empty($array)) {
             return $this->arrayDot($array);
         }
 
