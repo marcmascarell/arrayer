@@ -126,6 +126,12 @@ File::put('test.php', $builder->getContent()); // getContent returns a prepared 
 
 Changelog
 ----
+
+### 2.1
+- Added tests
+- Fixed arrayDot not being created on constructor
+- Removed unnecessary dependency
+
 ### 2.0
 - Added manipulation methods (get, set, delete)
 - Dot notation
