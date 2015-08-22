@@ -1,6 +1,6 @@
 {
     "name": "mascame/arrayer",
-    "description": "Prepares an array to be put in a file. Very useful for configuration files.",
+    "description": "Array manipulation with dot notation. Also prepares an array to be put in a file. Very useful for config files.",
     "homepage": "https://github.com/marcmascarell/arrayer",
     "keywords": [
         "array manipulation",
@@ -23,9 +23,6 @@
         "codeception/codeception": "2.*"
     },
     "autoload": {
-        "classmap": [
-            "src/migrations"
-        ],
         "psr-0": {
             "Mascame\\Arrayer\\": "src/"
         }
