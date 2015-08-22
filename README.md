@@ -4,17 +4,17 @@ Arrayer
 [![Latest Stable Version](https://poser.pugx.org/mascame/arrayer/v/stable.svg)](https://packagist.org/packages/mascame/arrayer)
 [![License](https://poser.pugx.org/mascame/arrayer/license.svg)](https://packagist.org/packages/mascame/arrayer)
 
-Array manipulation. Get, set, delete keys with dot notation, prepares an array to be put in a file (Very useful for configuration files).
+Array manipulation. Get, set & delete keys with dot notation, also prepares an array to be put in a file (php array or json).
 
 Installation
 --------------
 
 Require this package in your composer.json and run composer update:
 
-    "mascame/arrayer": "2.*"
+    "mascame/arrayer": "3.*"
 
 
-Laravel
+Laravel (is not mandatory to use it)
 --------------
 
 Add the Service Provider to `app/config` at the bottom of Providers:
@@ -57,75 +57,51 @@ $array = array(
 
 $arrayer = new \Mascame\Arrayer\Arrayer($array);
 
-$arrayer->append("I am an appended!");
-
 $arrayer->set('we.use.dot.notation', array('so', 'cool.'));
-$arrayer->set('more.examples', 'test');
 
-$arrayer->set('this.is', 'this is gonna be deleted soon...');
+$arrayer->set('this.is', 'we gonna delete this very soon...');
 $arrayer->delete('this.is');
 
+$arrayer->set('more.examples', 'test');
 $arrayer->get('more.examples'); // returns 'test'
 
-$arrayer->getArray();
-/** equals to
-
-(
-    [this] => Array
-        (
-            [0] => example
-        )
-
-    [we use a] => normal array
-    [and transform it] => Array
-        (
-            [to be] => Array
-                (
-                    [able] => Array
-                        (
-                            [to put it] => in a file
-                        )
-                )
-        )
-
-    [0] => thats it
-    [1] => cool? :)
-    [2] => I am an appended!
-    [we] => Array
-        (
-            [use] => Array
-                (
-                    [dot] => Array
-                        (
-                            [notation] => Array
-                                (
-                                    [0] => so
-                                    [1] => cool.
-                                )
-                        )
-                )
-        )
-
-    [more] => Array
-        (
-            [examples] => test
-        )
-
-)
-*/
+$arrayer->getArray(); // returns the modified array
 ```
 
 Build a prepared output for file:
 
 ```php
 
-$builder = new \Mascame\Arrayer\Builder($arrayer->getArray(), true); // (any array, (bool)minified)
+/**
+   Available options for ArrayBuilder
+    [
+        'oldSyntax' => false, // use old array syntax
+        'minify' => false,
+        'startWithScript' => true, // start with <?php
+        'initialStatement' => 'return ',
+    ]
+*/
+$builder = new \Mascame\Arrayer\Builder\ArrayBuilder($arrayer->getArray(), $options);
 
 File::put('test.php', $builder->getContent()); // getContent returns a prepared output to put in a file
+
+/**
+   Available options for JsonBuilder
+    [
+        'minify' => false,
+    ]
+*/
+$builder = new \Mascame\Arrayer\Builder\JsonBuilder($arrayer->getArray(), $options);
+
+File::put('test.json', $builder->getContent());
 ```
 
 Changelog
 ----
+### 3.0
+- Simplified code
+- Improved ArrayBuilder, added options and included JsonBuilder
+- Removed ->append() method @ Arrayer because was a bit confusing
 
 ### 2.1
 - Added tests
