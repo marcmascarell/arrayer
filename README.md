@@ -14,15 +14,6 @@ Require this package in your composer.json and run composer update:
     "mascame/arrayer": "3.*"
 
 
-Laravel (is not mandatory to use it)
---------------
-
-Add the Service Provider to `app/config` at the bottom of Providers:
-
-```php
-Mascame\Arrayer\ArrayerServiceProvider
-```
-
 Usage
 --------------
 
@@ -102,6 +93,7 @@ Changelog
 - Simplified code
 - Improved ArrayBuilder, added options and included JsonBuilder
 - Removed ->append() method @ Arrayer because was a bit confusing
+- Removed not used laravel specific files
 
 ### 2.1
 - Added tests
