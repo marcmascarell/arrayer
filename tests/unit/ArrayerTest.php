@@ -67,10 +67,11 @@ class ArrayerTest extends \Codeception\TestCase\Test
         $this->tester->assertEquals(null, $arrayer->get('test'));
     }
 
-    public function testAppendMethod()
+    public function testHasMethod()
     {
         $arrayer = new \Mascame\Arrayer\Arrayer([]);
-        $arrayer->append(['fruit' => 'coconut']);
-        $this->tester->assertEquals('coconut', $arrayer->getArray()[0]['fruit']);
+        $arrayer->set('fruit', 'coconut');
+        $this->tester->assertTrue($arrayer->has('fruit'));
+        $this->tester->assertFalse($arrayer->has('something-else'));
     }
 }

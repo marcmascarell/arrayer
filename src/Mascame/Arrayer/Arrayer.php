@@ -13,7 +13,7 @@ class Arrayer {
     /**
      * @var array
      */
-    protected $arrayDot = array();
+    protected $arrayDot = [];
 
     /**
      * @param array $array
@@ -21,29 +21,40 @@ class Arrayer {
     public function __construct(array $array) {
         $this->array = $array;
 
-        $this->convertToArrayDot();
+        $this->arrayDot = $this->convertToArrayDot($this->array);
+    }
+
+    /**
+     * @param $key
+     * @return bool
+     */
+    public function has($key) {
+        return isset($this->arrayDot[$key]);
     }
 
     /**
      * @param $key
      * @param null $default
-     * @return mixed
+     * @return null
      */
     public function get($key, $default = null) {
-        $result = $this->arrayGet($this->arrayDot, $key, $default);
+        if ($this->has($key)) return $this->arrayDot[$key];
 
-        if (! $result) return $default;
-
-        return $result;
+        return $default;
     }
 
     /**
      * @param $key
      * @param $value
+     * @return $this
      */
     public function set($key, $value) {
-        $this->arraySet($this->array, $key, $value);
+        $this->arrayDot[$key] = $value;
 
+        /*
+         * Possibly $value contains an array
+         * so we need to ensure it gets converted to dot notation
+         */
         $this->convertToArrayDot();
 
         return $this;
@@ -51,25 +62,10 @@ class Arrayer {
 
     /**
      * @param $key
+     * @return $this
      */
     public function delete($key) {
-        $this->getArrayDot();
-
         unset($this->arrayDot[$key]);
-
-        $this->revertArrayDot();
-
-        return $this;
-    }
-
-    /**
-     * @param $array
-     * @return string
-     */
-    public function append($array) {
-        array_push($this->array, $array);
-
-        $this->convertToArrayDot();
 
         return $this;
     }
@@ -78,45 +74,14 @@ class Arrayer {
      * @return array
      */
     public function getArray() {
-        return $this->array;
+        return $this->revertArrayDot();
     }
 
     /**
      * @return array
      */
     public function getArrayDot() {
-        if (!empty($this->arrayDot)) return $this->arrayDot;
-
-        return $this->convertToArrayDot();
-    }
-
-    /**
-     * Get an item from an array using "dot" notation.
-     *
-     * @param  array   $array
-     * @param  string  $key
-     * @param  mixed   $default
-     * @return mixed
-     */
-    protected function arrayGet($array, $key, $default = null)
-    {
-        if (function_exists('array_get')) return array_get($array, $key, $default = null);
-
-        if (is_null($key)) return $array;
-
-        if (isset($array[$key])) return $array[$key];
-
-        foreach (explode('.', $key) as $segment)
-        {
-            if ( ! is_array($array) || ! array_key_exists($segment, $array))
-            {
-                return ($default instanceof \Closure)  ? $default() : $default;
-            }
-
-            $array = $array[$segment];
-        }
-
-        return $array;
+        return $this->arrayDot;
     }
 
     /**
@@ -188,8 +153,9 @@ class Arrayer {
 
     /**
      * @param array $arrayDot
+     * @return array
      */
-    protected function revertArrayDot($arrayDot = array()) {
+    protected function revertArrayDot($arrayDot = []) {
         $array = (!empty($arrayDot)) ? $arrayDot : $this->arrayDot;
 
         $this->array = array();
@@ -197,17 +163,17 @@ class Arrayer {
         foreach ($array as $key => $value) {
             $this->arraySet($this->array, $key, $value);
         }
+
+        return $this->array;
     }
 
     /**
      * @param array $array
      * @return array
      */
-    protected function convertToArrayDot($array = array()) {
-        if (! empty($array)) {
-            return $this->arrayDot($array);
-        }
+    protected function convertToArrayDot($array = []) {
+        if (! empty($array)) return $this->arrayDot($array);
 
-        return $this->arrayDot = $this->arrayDot($this->array);
+        return $this->arrayDot = $this->arrayDot($this->arrayDot);
     }
 }
