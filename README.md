@@ -17,8 +17,6 @@ Require this package in your composer.json and run composer update:
 Usage
 --------------
 
-This example uses laravel's "File" class to put file contents. 
-
 ```php
 
 use \Mascame\Arrayer\Arrayer;
@@ -59,7 +57,7 @@ $arrayer->get('more.examples'); // returns 'test'
 $arrayer->getArray(); // returns the modified array
 ```
 
-Build a prepared output for file:
+Build a prepared output for file (This example uses Laravel's "File" class to put file contents):
 
 ```php
 
