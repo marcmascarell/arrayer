@@ -125,7 +125,7 @@ Thank you for considering contributing! You can contribute at any time forking t
 Support
 ----
 
-If you need help or need any kind of support, please send an e-mail to Marc Mascarell at marcmascarell@gmail.com.
+If you need help or any kind of support, please send an e-mail to Marc Mascarell at marcmascarell@gmail.com.
 
 License
 ----
