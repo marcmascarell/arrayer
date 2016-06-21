@@ -66,7 +66,7 @@ Build a prepared output for file (This example uses Laravel's "File" class to pu
     [
         'oldSyntax' => false, // use old array syntax
         'minify' => false,
-        'indexes' => true, // Show the incremental index in case there is no key
+        'indexes' => true, // Show the incremental indexes (array keys)
         'startWithScript' => true, // start with <?php
         'initialStatement' => 'return ',
     ]
@@ -88,6 +88,14 @@ File::put('test.json', $builder->getContent());
 
 Changelog
 ----
+
+### 3.3
+- ArrayBuilder 'indexes' option to remove the incremental indexes (array keys)
+
+### 3.1
+- Simplification
+- Improved builders
+
 ### 3.0
 - Simplified code
 - Improved ArrayBuilder, added options and included JsonBuilder
