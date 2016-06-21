@@ -3,6 +3,7 @@ Arrayer
 
 [![Latest Stable Version](https://poser.pugx.org/mascame/arrayer/v/stable.svg)](https://packagist.org/packages/mascame/arrayer)
 [![License](https://poser.pugx.org/mascame/arrayer/license.svg)](https://packagist.org/packages/mascame/arrayer)
+[![Travis](https://img.shields.io/travis/marcmascarell/arrayer.svg?maxAge=2592000?style=plastic)](https://travis-ci.org/marcmascarell/arrayer)
 
 Array manipulation. Get, set & delete keys with dot notation, also prepares an array to be put in a file (php array or json).
 
@@ -88,6 +89,9 @@ File::put('test.json', $builder->getContent());
 
 Changelog
 ----
+
+### 3.4
+- Fix missing files after migration to PSR-4 
 
 ### 3.3
 - ArrayBuilder 'indexes' option to remove the incremental indexes (array keys)
