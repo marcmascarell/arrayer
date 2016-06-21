@@ -66,6 +66,7 @@ Build a prepared output for file (This example uses Laravel's "File" class to pu
     [
         'oldSyntax' => false, // use old array syntax
         'minify' => false,
+        'indexes' => true, // Show the incremental index in case there is no key
         'startWithScript' => true, // start with <?php
         'initialStatement' => 'return ',
     ]
