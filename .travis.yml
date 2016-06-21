@@ -13,4 +13,6 @@ install:
 before_script:
     - #Code that creates and seeds my database and so on
 
-script: php vendor/codeception/codeception/codecept run
+script:
+    - php vendor/codeception/codeception/codecept bootstrap
+    - php vendor/codeception/codeception/codecept run
