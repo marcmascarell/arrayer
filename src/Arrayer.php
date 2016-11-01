@@ -2,9 +2,8 @@
 
 namespace Mascame\Arrayer;
 
-
-class Arrayer {
-
+class Arrayer
+{
     /**
      * @var array
      */
@@ -18,7 +17,8 @@ class Arrayer {
     /**
      * @param array $array
      */
-    public function __construct(array $array) {
+    public function __construct(array $array)
+    {
         $this->array = $array;
 
         $this->arrayDot = $this->convertToArrayDot($this->array);
@@ -28,7 +28,8 @@ class Arrayer {
      * @param $key
      * @return bool
      */
-    public function has($key) {
+    public function has($key)
+    {
         return isset($this->arrayDot[$key]);
     }
 
@@ -37,8 +38,11 @@ class Arrayer {
      * @param null $default
      * @return null
      */
-    public function get($key, $default = null) {
-        if ($this->has($key)) return $this->arrayDot[$key];
+    public function get($key, $default = null)
+    {
+        if ($this->has($key)) {
+            return $this->arrayDot[$key];
+        }
 
         return $default;
     }
@@ -48,7 +52,8 @@ class Arrayer {
      * @param $value
      * @return $this
      */
-    public function set($key, $value) {
+    public function set($key, $value)
+    {
         $this->arrayDot[$key] = $value;
 
         /*
@@ -64,7 +69,8 @@ class Arrayer {
      * @param $key
      * @return $this
      */
-    public function delete($key) {
+    public function delete($key)
+    {
         unset($this->arrayDot[$key]);
 
         return $this;
@@ -73,14 +79,16 @@ class Arrayer {
     /**
      * @return array
      */
-    public function getArray() {
+    public function getArray()
+    {
         return $this->revertArrayDot();
     }
 
     /**
      * @return array
      */
-    public function getArrayDot() {
+    public function getArrayDot()
+    {
         return $this->arrayDot;
     }
 
@@ -96,26 +104,29 @@ class Arrayer {
      * @param  mixed   $value
      * @return array
      */
-    protected function arraySet(&$array, $key, $value) {
-        if (function_exists('array_set')) return array_set($array, $key, $value);
+    protected function arraySet(&$array, $key, $value)
+    {
+        if (function_exists('array_set')) {
+            return array_set($array, $key, $value);
+        }
 
-        if (is_null($key)) return $array = $value;
+        if (is_null($key)) {
+            return $array = $value;
+        }
 
         $keys = explode('.', $key);
 
-        while (count($keys) > 1)
-        {
+        while (count($keys) > 1) {
             $key = array_shift($keys);
 
             // If the key doesn't exist at this depth, we will just create an empty array
             // to hold the next value, allowing us to create the arrays to hold final
             // values at the correct depth. Then we'll keep digging into the array.
-            if ( ! isset($array[$key]) || ! is_array($array[$key]))
-            {
-                $array[$key] = array();
+            if (! isset($array[$key]) || ! is_array($array[$key])) {
+                $array[$key] = [];
             }
 
-            $array =& $array[$key];
+            $array = &$array[$key];
         }
 
         $array[array_shift($keys)] = $value;
@@ -125,25 +136,24 @@ class Arrayer {
 
     /**
      * Flatten a multi-dimensional associative array with dots.
-     * From Laravel framework
+     * From Laravel framework.
      *
      * @param  array   $array
      * @param  string  $prepend
      * @return array
      */
-    protected function arrayDot($array, $prepend = null) {
-        if (function_exists('array_dot')) return array_dot($array);
+    protected function arrayDot($array, $prepend = null)
+    {
+        if (function_exists('array_dot')) {
+            return array_dot($array);
+        }
 
-        $results = array();
+        $results = [];
 
-        foreach ($array as $key => $value)
-        {
-            if (is_array($value))
-            {
+        foreach ($array as $key => $value) {
+            if (is_array($value)) {
                 $results = array_merge($results, $this->arrayDot($value, $prepend.$key.'.'));
-            }
-            else
-            {
+            } else {
                 $results[$prepend.$key] = $value;
             }
         }
@@ -155,10 +165,11 @@ class Arrayer {
      * @param array $arrayDot
      * @return array
      */
-    protected function revertArrayDot($arrayDot = []) {
-        $array = (!empty($arrayDot)) ? $arrayDot : $this->arrayDot;
+    protected function revertArrayDot($arrayDot = [])
+    {
+        $array = (! empty($arrayDot)) ? $arrayDot : $this->arrayDot;
 
-        $this->array = array();
+        $this->array = [];
 
         foreach ($array as $key => $value) {
             $this->arraySet($this->array, $key, $value);
@@ -171,8 +182,11 @@ class Arrayer {
      * @param array $array
      * @return array
      */
-    protected function convertToArrayDot($array = []) {
-        if (! empty($array)) return $this->arrayDot($array);
+    protected function convertToArrayDot($array = [])
+    {
+        if (! empty($array)) {
+            return $this->arrayDot($array);
+        }
 
         return $this->arrayDot = $this->arrayDot($this->arrayDot);
     }

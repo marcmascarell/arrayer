@@ -2,9 +2,8 @@
 
 namespace Mascame\Arrayer\Builder;
 
-
-abstract class AbstractBuilder implements BuilderInterface {
-
+abstract class AbstractBuilder implements BuilderInterface
+{
     /**
      * @var
      */
@@ -26,7 +25,8 @@ abstract class AbstractBuilder implements BuilderInterface {
      * @param array $array
      * @param array $options
      */
-    public function __construct(array $array, $options = []) {
+    public function __construct(array $array, $options = [])
+    {
         $this->array = $array;
 
         $this->options = array_merge($this->defaultOptions, $options);
@@ -35,10 +35,10 @@ abstract class AbstractBuilder implements BuilderInterface {
     /**
      * @return $this
      */
-    public function minify() {
+    public function minify()
+    {
         $this->options['minify'] = true;
 
         return $this;
     }
-
 }

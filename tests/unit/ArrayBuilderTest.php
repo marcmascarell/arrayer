@@ -27,8 +27,8 @@ class ArrayBuilderTest extends \Codeception\TestCase\Test
                 'peanuts' => [
                     'under',
                     'attack',
-                    'serious' => 'fact'
-                ]
+                    'serious' => 'fact',
+                ],
             ],
             [
                 'oldSyntax' => false,
@@ -50,8 +50,8 @@ class ArrayBuilderTest extends \Codeception\TestCase\Test
                 'peanuts' => [
                     'under',
                     'attack',
-                    'serious' => 'fact'
-                ]
+                    'serious' => 'fact',
+                ],
             ],
             [
                 'oldSyntax' => true,
@@ -73,8 +73,8 @@ class ArrayBuilderTest extends \Codeception\TestCase\Test
                 'peanuts' => [
                     'under',
                     'attack',
-                    'serious' => 'fact'
-                ]
+                    'serious' => 'fact',
+                ],
             ],
             [
                 'oldSyntax' => true,

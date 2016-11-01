@@ -2,10 +2,9 @@
 
 namespace Mascame\Arrayer\Builder;
 
-
-interface BuilderInterface {
-
+interface BuilderInterface
+{
     public function getContent();
-    public function minify();
 
+    public function minify();
 }

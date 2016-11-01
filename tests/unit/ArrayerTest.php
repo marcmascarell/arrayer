@@ -30,9 +30,9 @@ class ArrayerTest extends \Codeception\TestCase\Test
             'test' => 'first value',
             'test2' => [
                 'deep' => [
-                    'deeper' => 'second value'
-                ]
-            ]
+                    'deeper' => 'second value',
+                ],
+            ],
         ]);
 
         $this->tester->assertEquals('first value', $arrayer->get('test'));
@@ -43,13 +43,13 @@ class ArrayerTest extends \Codeception\TestCase\Test
     public function testSetMethod()
     {
         $arrayer = new \Mascame\Arrayer\Arrayer([
-            'test' => 'first value'
+            'test' => 'first value',
         ]);
 
         $arrayer->set('test2', [
             'deep' => [
-                'deeper' => 'second value'
-            ]
+                'deeper' => 'second value',
+            ],
         ]);
 
         $this->tester->assertEquals('first value', $arrayer->get('test'));
@@ -59,7 +59,7 @@ class ArrayerTest extends \Codeception\TestCase\Test
     public function testDeleteMethod()
     {
         $arrayer = new \Mascame\Arrayer\Arrayer([
-            'test' => 'first value'
+            'test' => 'first value',
         ]);
 
         $arrayer->delete('test');
