@@ -2,9 +2,8 @@
 
 namespace Mascame\Arrayer\Builder;
 
-
-class ArrayBuilder extends AbstractBuilder {
-
+class ArrayBuilder extends AbstractBuilder
+{
     /**
      * @var array
      */
@@ -19,26 +18,38 @@ class ArrayBuilder extends AbstractBuilder {
     /**
      * @return string
      */
-    public function getContent() {
-        $content = var_export($this->array, true) . $this->end();
+    public function getContent()
+    {
+        $content = var_export($this->array, true).$this->end();
 
-        if (! $this->options['oldSyntax']) $content = $this->applyNewSyntax($content);
+        if (! $this->options['oldSyntax']) {
+            $content = $this->applyNewSyntax($content);
+        }
 
-        if (! $this->options['indexes']) $content = $this->removeIndexes($content);
+        if (! $this->options['indexes']) {
+            $content = $this->removeIndexes($content);
+        }
 
-        if ($this->options['minify']) $content = $this->applyMinification($content);
-        
-        if ($this->options['startWithScript']) $this->content = $this->start();
+        if ($this->options['minify']) {
+            $content = $this->applyMinification($content);
+        }
 
-        if ($this->options['initialStatement']) $this->content .= $this->options['initialStatement'];
+        if ($this->options['startWithScript']) {
+            $this->content = $this->start();
+        }
 
-        return $this->content . $content;
+        if ($this->options['initialStatement']) {
+            $this->content .= $this->options['initialStatement'];
+        }
+
+        return $this->content.$content;
     }
 
     /**
      * @return $this
      */
-    public function oldSyntax() {
+    public function oldSyntax()
+    {
         $this->options['oldSyntax'] = true;
 
         return $this;
@@ -47,7 +58,8 @@ class ArrayBuilder extends AbstractBuilder {
     /**
      * @return $this
      */
-    public function noIndexes() {
+    public function noIndexes()
+    {
         $this->options['indexes'] = false;
 
         return $this;
@@ -57,27 +69,29 @@ class ArrayBuilder extends AbstractBuilder {
      * @param $content
      * @return mixed
      */
-    protected function removeIndexes($content) {
-        $regex = "/(\\s*)[\\d*]\\s*=>\\s*/";
+    protected function removeIndexes($content)
+    {
+        $regex = '/(\\s*)[\\d*]\\s*=>\\s*/';
 
-        return preg_replace($regex, "$1", $content);
+        return preg_replace($regex, '$1', $content);
     }
 
     /**
      * @param $content
      * @return mixed
      */
-    protected function applyNewSyntax($content) {
+    protected function applyNewSyntax($content)
+    {
         return preg_replace(
             [
-                "/array \\($/m",
-                "/\\),$/m",
-                "/\\);$/m",
+                '/array \\($/m',
+                '/\\),$/m',
+                '/\\);$/m',
             ],
             [
-                "[",
-                "],",
-                "];",
+                '[',
+                '],',
+                '];',
             ],
             $content
         );
@@ -87,31 +101,32 @@ class ArrayBuilder extends AbstractBuilder {
      * @param $content
      * @return mixed
      */
-    protected function applyMinification($content) {
+    protected function applyMinification($content)
+    {
         $content = preg_replace([
-                "/\\n^\\s+\\[/m",
-                "/\\n^\\s+\\],/m",
-                "/\\n^\\];/m",
+                '/\\n^\\s+\\[/m',
+                '/\\n^\\s+\\],/m',
+                '/\\n^\\];/m',
 
-                "/\\n^\\s+array \\(/m",
-                "/\\n^\\s+\\),/m",
-                "/\\n^\\);/m",
+                '/\\n^\\s+array \\(/m',
+                '/\\n^\\s+\\),/m',
+                '/\\n^\\);/m',
 
                 "/\\n^\\s+\\'/m",
-                "/\\n^\\s+(\\d) =>\\s/m",
+                '/\\n^\\s+(\\d) =>\\s/m',
             ],
             [
-                "[",
-                "],",
-                "];",
+                '[',
+                '],',
+                '];',
 
                 // old syntax
-                "array(",
-                "),",
-                ");",
+                'array(',
+                '),',
+                ');',
 
                 "'",
-                "$1=>",
+                '$1=>',
             ],
            $content
         );
@@ -136,6 +151,6 @@ class ArrayBuilder extends AbstractBuilder {
      */
     protected function start()
     {
-        return '<?php' . PHP_EOL . PHP_EOL;
+        return '<?php'.PHP_EOL.PHP_EOL;
     }
 }
