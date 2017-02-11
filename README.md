@@ -12,7 +12,7 @@ Installation
 
 Require this package in your composer.json and run composer update:
 
-    "mascame/arrayer": "3.*"
+`composer require mascame/arrayer`
 
 
 Usage
